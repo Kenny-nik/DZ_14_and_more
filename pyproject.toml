@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "dz-14-and-more"
+version = "0.1.0"
+description = ""
+authors = ["Nikita <nikkitos.pershin.2000@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
