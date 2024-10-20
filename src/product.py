@@ -20,3 +20,4 @@ class Product:
 
 product1 = Product("Product 1", "Description 1", 99.99, 10)
 product2 = Product("Product 2", "Description 2", 199.99, 5)
+# работаем

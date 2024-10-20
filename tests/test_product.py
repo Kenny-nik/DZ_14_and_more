@@ -6,3 +6,4 @@ def test_product_init():
     assert product.description == "Test Description"
     assert product.price == 99.99
     assert product.quantity == 10
+# работаем

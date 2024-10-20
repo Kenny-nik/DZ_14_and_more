@@ -18,3 +18,4 @@ def test_product_count():
     category.add_product(product2)
     assert Category.product_count == 4
 
+#работаем

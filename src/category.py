@@ -28,3 +28,4 @@ category1 = Category("Category 1", "Description of category 1", [])
 category1.add_product(product1)
 category1.add_product(product2)
 category2 = Category("Category 2", "Description of category 2", [])
+# работаем
