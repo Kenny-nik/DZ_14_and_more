@@ -1,21 +1,32 @@
 from src.category import Category
 from src.product import Product
-def test_category_init():
-    category = Category("Test Category", "Test Description", [])
-    assert category.name == "Test Category"
-    assert category.description == "Test Description"
-    assert category.products == []
-def test_category_count():
-    Category("Category 1", "Description of category 1", [])
-    Category("Category 2", "Description of category 2", [])
-    assert Category.category_count == 0
 
-def test_product_count():
-    product1 = Product("Product 1", "Description 1", 99.99, 10)
-    product2 = Product("Product 2", "Description 2", 199.99, 5)
-    category = Category("Test Category", "Test Description", [])
-    category.add_product(product1)
-    category.add_product(product2)
+def test_init_category(category_1, category_2):
+    assert category_1.name == "Смартфоны"
+    assert (
+        category_1.description
+        == "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни"
+    )
+
+    assert category_2.name == "Телевизоры"
+    assert (
+        category_2.description
+        == "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником"
+    )
+
+    assert Category.category_count == 2
     assert Category.product_count == 4
+    assert len(category_1.list_product) == 3
+    assert len(category_2.list_product) == 1
 
+def test_category_products_property(category_1):
+    assert category_1.products == 'Samsung Galaxy S23 Ultra, 180000.0 руб., Остаток: 5 шт.\nIphone 15, 210000.0 руб., Остаток: 8 шт.\nXiaomi Redmi Note 11, 31000.0 руб., Остаток: 14 шт.\n'
+
+
+def test_add_product():
+    product = Product('1', '2', 3.0, 4)
+    product.name = '1'
+    product.description = '2'
+    product.price = 180000.0
+    product.quantity = 5
 #работаем

@@ -18,6 +18,7 @@ class Category:
         self.description = description
         self.products = products
         Category.product_count += len(self.products)
+        Category.category_count += 1
 
     def add_product(self, product):
         self.products.append(product)
