@@ -1,9 +1,11 @@
-from src.product import product2, product1
+from src.product import product1, product2
+
 
 class Category:
     """
     Класс для описания категории товара
     """
+
     name: str
     description: str
     products: list
@@ -20,6 +22,7 @@ class Category:
     def add_product(self, product):
         self.products.append(product)
         Category.product_count += 1
+
 
 category1 = Category("Category 1", "Description of category 1", [])
 category1.add_product(product1)
