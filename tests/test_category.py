@@ -30,3 +30,4 @@ def test_add_product():
     product.price = 180000.0
     product.quantity = 5
 #работаем
+

@@ -30,3 +30,4 @@ class Product:
             if answer != 'y':
                 return
         self.__price = new_price
+

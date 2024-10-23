@@ -27,3 +27,4 @@ class Category:
     @property
     def list_product(self):
         return self.__products
+
