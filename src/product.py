@@ -5,6 +5,7 @@ class Product:
     description: str
     price: float
     quantity: int
+
     def __init__(self, name, description, price, quantity):
         """Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра."""
         self.name = name
@@ -42,9 +43,7 @@ class Product:
         if new_price <= 0:
             print("Цена не должна быть нулевая или отрицательная")
         elif new_price < self.__price:
-            confirmation = input(
-                f"Подтвердите понижение цены c {self.__price} до {new_price}: y(да)/n(нет)\n"
-            ).lower()
+            confirmation = input(f"Подтвердите понижение цены c {self.__price} до {new_price}: y(да)/n(нет)\n").lower()
             if confirmation == "y":
                 self.__price = new_price
         else:
