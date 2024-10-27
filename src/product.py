@@ -1,32 +1,51 @@
 class Product:
-    """Класс предоставляющий информацию о товаре, описании, цене и количестве"""
-    def __init__(self, name: str, description: str, price: float, quantity: int):
+    """Класс описывает название продукта, назначение, цену и количество продукта"""
+
+    name: str
+    description: str
+    price: float
+    quantity: int
+    def __init__(self, name, description, price, quantity):
+        """Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра."""
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
 
+    def __str__(self):
+        """Магический метод возвращающий строковое отображение информации о стоимости и количестве продукта"""
+        return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other):
+        """Магический метод возвращает сумму цен двух товаров"""
+        return (self.price * self.quantity) + (other.price * other.quantity)
+
     @classmethod
-    def new_product(cls, dict_product, products=None):
+    def new_product(cls, dict_product: dict, products=None):
+        """Метод добавляет новый продукт"""
         if products:
             for product in products:
-                if product.name == dict_product['name']:
-                    product.quantity += dict_product['quantity']
-                    product.price = max([product.price, dict_product['price']])
+                if product.name == dict_product["name"]:
+                    product.quantity += dict_product["quantity"]
+                    product.price = max([product.price, product["price"]])
                     return product
-        return cls(dict_product['name'], dict_product['description'], dict_product['price'], dict_product['quantity'])
+        return cls(**dict_product)
 
     @property
     def price(self):
+        """Метод возвращает цену продукта"""
         return self.__price
 
     @price.setter
-    def price(self, new_price: int):
+    def price(self, new_price):
+        """Метод позволяет изменить цену продукта"""
         if new_price <= 0:
-            print('Цена не должна быть нулевая или отрицательная')
-            return
-        if new_price < self.__price:
-            answer = input('Введите "y", если согласны понизить цену, если не согласны введите "n"\n')
-            if answer != 'y':
-                return
-        self.__price = new_price
+            print("Цена не должна быть нулевая или отрицательная")
+        elif new_price < self.__price:
+            confirmation = input(
+                f"Подтвердите понижение цены c {self.__price} до {new_price}: y(да)/n(нет)\n"
+            ).lower()
+            if confirmation == "y":
+                self.__price = new_price
+        else:
+            self.__price = new_price
