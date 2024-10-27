@@ -1,32 +1,28 @@
-from src.category import Category
-from src.product import Product
+import pytest
 
-def test_init_category(category_1, category_2):
-    assert category_1.name == "Смартфоны"
-    assert (
-        category_1.description
-        == "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни"
+
+def test_count_products_and_category(category, product) -> None:
+    assert category.product_count == 4
+    assert category.category_count == 1
+    category.add_product(product)
+    assert category.product_count == 5
+
+
+def test_category_property(category_test):
+    assert category_test.products == (
+        "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт.\n"
+        "Iphone 15, 210000.0 руб. Остаток: 8 шт.\n"
     )
 
-    assert category_2.name == "Телевизоры"
+
+def test_iter_category(category_test):
     assert (
-        category_2.description
-        == "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником"
+        next(category_test) == "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт."
     )
-
-    assert Category.category_count == 2
-    assert Category.product_count == 4
-    assert len(category_1.list_product) == 3
-    assert len(category_2.list_product) == 1
-
-def test_category_products_property(category_1):
-    assert category_1.products == 'Samsung Galaxy S23 Ultra, 180000.0 руб., Остаток: 5 шт.\nIphone 15, 210000.0 руб., Остаток: 8 шт.\nXiaomi Redmi Note 11, 31000.0 руб., Остаток: 14 шт.\n'
+    assert next(category_test) == "Iphone 15, 210000.0 руб. Остаток: 8 шт."
+    with pytest.raises(StopIteration):
+        next(category_test)
 
 
-def test_add_product():
-    product = Product('1', '2', 3.0, 4)
-    product.name = '1'
-    product.description = '2'
-    product.price = 180000.0
-    product.quantity = 5
-#работаем
+def test_category_str(category_test):
+    assert str(category_test) == "Смартфоны, количество продуктов: 13 шт."
