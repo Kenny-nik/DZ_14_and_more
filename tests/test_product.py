@@ -33,7 +33,7 @@ def test_new_price_negative(capsys, product):
 
 
 @patch("builtins.input", side_effect="y")
-def test_new_price_low(mock, product):
+def test_new_price_low(product):
     product.price = 5
     assert product.price == 5
 
