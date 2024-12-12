@@ -1,5 +1,3 @@
-from symtable import Class
-
 from src.product import Product
 
 
@@ -32,4 +30,3 @@ class Category:
     @property
     def list_product(self):
         return self.__products
-
