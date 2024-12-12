@@ -17,6 +17,7 @@ class Category:
         Category.category_count += 1
         self.products_index = 0
 
+
     def __str__(self):
         """Магический метод возвращающий строковое отображение информации о количестве продуктов"""
         count_products = 0
