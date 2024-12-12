@@ -17,7 +17,7 @@ def test_products(product) -> None:
     assert product.quantity == 1
     assert str(product) == "Nokia 3310, 9.99 руб. Остаток: 1 шт."
 
-
+   
 def test_new_product(new_product):
     result = Product.new_product(new_product)
     assert result.name == "Samsung Galaxy C23 Ultra"

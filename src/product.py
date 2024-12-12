@@ -12,6 +12,17 @@ class Product:
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__()
+
+    def __str__(self):
+        """Магический метод возвращающий строковое отображение информации о стоимости и количестве продукта"""
+        return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other):
+        if type(other) is self.__class__:
+            return (self.price * self.quantity) + (other.price * other.quantity)
+        else:
+            raise TypeError
 
     def __str__(self):
         """Магический метод возвращающий строковое отображение информации о стоимости и количестве продукта"""
