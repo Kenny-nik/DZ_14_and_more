@@ -1,3 +1,5 @@
+from symtable import Class
+
 from src.product import Product
 
 
@@ -16,8 +18,9 @@ class Category:
         Category.category_count += 1
 
     def add_product(self, product: Product):
-        self.__products.append(product)
-        Category.product_count += 1
+        if isinstance(product, Product) or issubclass(product, Product):
+            self.__products.append(product)
+            Category.product_count += 1
 
     @property
     def products(self):
@@ -29,3 +32,4 @@ class Category:
     @property
     def list_product(self):
         return self.__products
+
