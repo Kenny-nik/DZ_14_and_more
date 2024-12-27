@@ -2,30 +2,61 @@ from src.product import Product
 
 
 class Category:
-    """Класс предоставляющий информацию о категории товара, количестве товаров в категории и количестве категорий"""
+    """Класс описывает название категории и её описание. Подсчитывает количество
+    продуктов в категории и количество категорий"""
 
-    category_count = 0
+    name: str
+    description: str
+    products: list
     product_count = 0
+    category_count = 0
 
-    def __init__(self, name: str, description: str, products: list):
+    def __init__(self, name, description, products):
+        """Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра."""
         self.name = name
         self.description = description
         self.__products = products if products else []
-
-        Category.product_count += len(products) if products else 0
+        Category.product_count += len(products)
         Category.category_count += 1
+        self.products_index = 0
 
-    def add_product(self, product: Product):
-        self.__products.append(product)
-        Category.product_count += 1
+    def __str__(self):
+        """Магический метод возвращающий строковое отображение информации о количестве продуктов"""
+        count_products = 0
+        for product in self.__products:
+            count_products += product.quantity
+        return f"{self.name}, количество продуктов: {count_products} шт."
+
+    def __iter__(self):
+        self.products_index = 0
+        return self
+
+    def __next__(self):
+        if self.products_index < len(self.__products):
+            result = self.__products[self.products_index]
+            self.products_index += 1
+            return str(result)
+        else:
+            raise StopIteration
+
+    def add_product(self, product):
+        """Метод добавляет продукт к списку продуктов в категории"""
+        if isinstance(product, Product):
+            self.__products.append(product)
+            Category.product_count += 1
+        else:
+            raise TypeError
+
+    def middle_price(self):
+        try:
+            return sum([product.price for product in self.__products]) / len(self.__products)
+        except ZeroDivisionError:
+            return 0
 
     @property
     def products(self):
-        products_str = ""
+        """Метод возвращает строку с названием продукта его стоимость и остаток"""
+        products_string = ""
         for product in self.__products:
-            products_str += f"{product.name}, {product.price} руб., Остаток: {product.quantity} шт.\n"
-        return products_str
-
-    @property
-    def list_product(self):
-        return self.__products
+            products_string += f"{str(product)}\n"
+        return products_string
